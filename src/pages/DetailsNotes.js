@@ -15,7 +15,7 @@ export default function DetailsNotes() {
   return (
     <Main>
       <Container>
-        <h1>Task Details: </h1>
+        <h1>Notes Details: </h1>
         <br />
         <Title>{capitalizeFirstLetter(editNotesData.todo)} </Title>
         <br />
