@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Provider } from "react-redux";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
+import Header from "./components/Header";
 
-function App() {
+// pages
+import DetailsNotes from "./pages/DetailsNotes";
+import EditNotes from "./pages/EditNotes";
+import Notes from "./pages/Notes";
+
+// redux store
+import { store, persistor } from "./redux/store";
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <div style={{ padding: 20 }}>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <Routes>
+              <Route path="/" element={<Notes />} />
+              <Route path="/:notes_id/edit" element={<EditNotes />} />
+              <Route path="/:notes_title/details" element={<DetailsNotes />} />
+
+              {/* not Found App */}
+              <Route path="*" element={<Notes />} />
+            </Routes>
+          </PersistGate>
+        </Provider>
+      </div>
+    </BrowserRouter>
   );
 }
-
-export default App;
