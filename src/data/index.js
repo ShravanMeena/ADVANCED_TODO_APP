@@ -13,9 +13,6 @@ export const colors = [
     code: "blue",
   },
   {
-    code: "aliceblue",
-  },
-  {
     code: "black",
   },
   {

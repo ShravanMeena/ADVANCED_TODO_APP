@@ -167,7 +167,7 @@ export default function TaskModal({ handleClose }) {
               defaultChecked={checked}
               onChange={() => setChecked(!checked)}
             />
-            Do you complete this toic
+            Do you complete this note
           </label>
         </div>
       )}
