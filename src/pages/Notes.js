@@ -122,7 +122,6 @@ const Box = styled.div`
   min-height: 150px;
   width: 24%;
   position: relative;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

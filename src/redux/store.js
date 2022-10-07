@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage"; // defaults to localStorage for
 
 // reduxers
 import notesReducers from "./reducers/notesReducers";
+import errorReducers from "./reducers/errorReducers";
 
 const persistConfig = {
   key: "root",
@@ -13,6 +14,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   notesReducers,
+  errorReducers,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

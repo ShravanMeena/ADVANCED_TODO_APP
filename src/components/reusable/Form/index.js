@@ -9,8 +9,9 @@ import {
   createNotesAction,
   finalEditNotesAction,
 } from "../../../redux/action/notesAction";
-// import ImageUpload from "../ImageUpload";
+import { errorAction } from "../../../redux/action/errorActions";
 import { useNavigate } from "react-router";
+import Alert from "../Alert";
 
 export default function TaskModal({ handleClose }) {
   const [title, setTitle] = useState("");
@@ -24,13 +25,15 @@ export default function TaskModal({ handleClose }) {
   const dispatch = useDispatch();
 
   const { notesData } = useSelector((state) => state.notesReducers);
+  const { error } = useSelector((state) => state.errorReducers);
 
   const { editNotesData } = useSelector((state) => state.notesReducers);
 
   useEffect(() => {
     setTitle(editNotesData?.todo);
     setDesc(editNotesData?.description);
-    setColor(editNotesData?.color || "blue");
+    setColor(editNotesData?.color || "red");
+
     if (editNotesData?.id) {
       seIsEdit(true);
     }
@@ -52,10 +55,32 @@ export default function TaskModal({ handleClose }) {
       color,
     };
 
-    if (!title) {
+    let isAlreadyTitleExist = [];
+
+    if (isEdit) {
+      let withoutEditableData = notesData?.filter(
+        (flt) => flt.id !== editNotesData.id
+      );
+      isAlreadyTitleExist = withoutEditableData?.filter(
+        (flt) => flt.todo?.toLowerCase() === title?.toLowerCase()
+      );
+    } else {
+      isAlreadyTitleExist = notesData?.filter(
+        (flt) => flt.todo?.toLowerCase() === title?.toLowerCase()
+      );
+    }
+
+    if (isAlreadyTitleExist?.length > 0) {
+      dispatch(errorAction("Title should not be same as existing title"));
       return;
     }
-    if (!description) {
+
+    if (!title) {
+      dispatch(errorAction("Title is mandatory"));
+      return;
+    }
+    if (title.length > 10 && !description) {
+      dispatch(errorAction("Description is mandatory"));
       return;
     }
 
@@ -70,6 +95,7 @@ export default function TaskModal({ handleClose }) {
       getEditabaleNotes.color = color;
 
       dispatch(finalEditNotesAction(notesData));
+
       navigate("/");
     } else {
       dispatch(createNotesAction(data));
@@ -78,8 +104,11 @@ export default function TaskModal({ handleClose }) {
     handleClose && handleClose();
   };
 
+  console.log(error, "erroerrorerrorerrorr");
   return (
     <Form>
+      {error && <Alert>{error}</Alert>}
+
       <InputTextField
         label="Enter title"
         placeholder="Enter yout title"
@@ -109,6 +138,7 @@ export default function TaskModal({ handleClose }) {
           style={{ width: 50, height: 50 }}
         />
       )} */}
+
       <select
         style={{
           width: "100%",
@@ -121,7 +151,7 @@ export default function TaskModal({ handleClose }) {
         {colors.map((item, index) => {
           return (
             <option value={item.code} key={index}>
-              {item?.code?.toUpperCase()}{" "}
+              {item?.code?.toUpperCase()}
             </option>
           );
         })}

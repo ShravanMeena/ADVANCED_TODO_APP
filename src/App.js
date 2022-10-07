@@ -16,6 +16,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Header />
+
       <div style={{ padding: 20 }}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>

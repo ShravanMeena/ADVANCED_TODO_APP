@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Form from "../components/reusable/Form";
 import Title from "../components/reusable/Title";
+
 export default function EditNotes() {
   return (
     <Main>
