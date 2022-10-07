@@ -20,6 +20,8 @@ import { AiOutlineDelete } from "react-icons/ai";
 import Center from "../components/reusable/Center";
 import SubTitle from "../components/reusable/SubTitle";
 import Span from "../components/reusable/Span";
+import Alert from "../components/reusable/Alert";
+import { errorAction } from "../redux/action/errorActions";
 
 function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -37,11 +39,18 @@ export default function Notes() {
     navigate(`${_item_values.id}/edit`);
   };
 
+  const redirectToDetails = (_item_values) => {
+    dispatch(editNotesAction(_item_values));
+    navigate(`${_item_values.id}/details`);
+  };
+
   const deleteNotesHandler = (_item_values) => {
     const remainData = notesData?.filter(
       (flt) => flt.todo !== _item_values.todo
     );
     dispatch(deleteNotesAction(remainData));
+
+    dispatch(errorAction("Succesfully notes deleted "));
   };
 
   const addNotesHandler = () => {
@@ -56,6 +65,8 @@ export default function Notes() {
   return (
     <Main>
       {isOpen && <TaskModal handleClose={handleClose} />}
+
+      <Alert />
 
       <Flex justifyContent="space-between">
         <Title>
@@ -79,9 +90,21 @@ export default function Notes() {
         {notesData.map((item, index) => {
           return (
             <Box color={item.color} key={index}>
-              <div>
-                <Title>{capitalizeFirstLetter(item.todo)}</Title>
-                <Description>{item.description}</Description>
+              <div onClick={() => redirectToDetails(item)}>
+                <Title style={{ width: "95%" }}>
+                  {capitalizeFirstLetter(
+                    item.todo?.length > 30
+                      ? item.todo?.slice(0, 30) + "..."
+                      : item.todo
+                  )}
+                </Title>
+                <Description>
+                  {capitalizeFirstLetter(
+                    item.description?.length > 180
+                      ? item.description?.slice(0, 180) + "..."
+                      : item.description
+                  )}
+                </Description>
               </div>
               <Flex justifyContent="space-between">
                 <SubTitle>Created At :{item.createdAt}</SubTitle>
@@ -91,6 +114,25 @@ export default function Notes() {
                 <FiEdit2 onClick={() => redirectToEdit(item)} />
                 <AiOutlineDelete onClick={() => deleteNotesHandler(item)} />
               </Absolute>
+
+              {item.completed && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: -14,
+                    left: -10,
+                  }}
+                >
+                  <Button
+                    style={{
+                      backgroundColor: "green",
+                      color: "white",
+                    }}
+                  >
+                    COMPLETED
+                  </Button>
+                </div>
+              )}
             </Box>
           );
         })}
@@ -125,7 +167,7 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
+  cursor: pointer;
   @media (max-width: 768px) {
     width: 100%;
   }

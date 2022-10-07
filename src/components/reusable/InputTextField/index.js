@@ -46,6 +46,6 @@ const TextInput = styled.textarea`
   border-radius: 4px;
 `;
 
-const Label = styled.label`
-  margin-top: 20px;
+const Label = styled.p`
+  margin-top: 10px;
 `;

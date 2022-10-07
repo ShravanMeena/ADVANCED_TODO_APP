@@ -12,6 +12,7 @@ import {
 import { errorAction } from "../../../redux/action/errorActions";
 import { useNavigate } from "react-router";
 import Alert from "../Alert";
+import { colors } from "../../../data";
 
 export default function TaskModal({ handleClose }) {
   const [title, setTitle] = useState("");
@@ -19,13 +20,13 @@ export default function TaskModal({ handleClose }) {
   // const [image, setImage] = useState("");
   const [isEdit, seIsEdit] = useState(false);
   const [color, setColor] = useState("");
+  const [checked, setChecked] = React.useState(false);
 
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   const { notesData } = useSelector((state) => state.notesReducers);
-  const { error } = useSelector((state) => state.errorReducers);
 
   const { editNotesData } = useSelector((state) => state.notesReducers);
 
@@ -33,6 +34,7 @@ export default function TaskModal({ handleClose }) {
     setTitle(editNotesData?.todo);
     setDesc(editNotesData?.description);
     setColor(editNotesData?.color || "red");
+    setChecked(editNotesData?.completed);
 
     if (editNotesData?.id) {
       seIsEdit(true);
@@ -50,7 +52,7 @@ export default function TaskModal({ handleClose }) {
       description,
       completed: false,
       // image,
-      createdAt: !isEdit ? myDate : editNotesData?.createdAt,
+      createdAt: myDate,
       updatedAt: myDate,
       color,
     };
@@ -79,7 +81,7 @@ export default function TaskModal({ handleClose }) {
       dispatch(errorAction("Title is mandatory"));
       return;
     }
-    if (title.length > 10 && !description) {
+    if (title.length < 10 && !description) {
       dispatch(errorAction("Description is mandatory"));
       return;
     }
@@ -92,34 +94,34 @@ export default function TaskModal({ handleClose }) {
       getEditabaleNotes.todo = title;
       getEditabaleNotes.updatedAt = myDate;
       getEditabaleNotes.description = description;
+      getEditabaleNotes.completed = checked;
       getEditabaleNotes.color = color;
 
       dispatch(finalEditNotesAction(notesData));
+      dispatch(errorAction("Succesfully notes updated"));
 
       navigate("/");
     } else {
       dispatch(createNotesAction(data));
+      dispatch(errorAction("Succesfully notes added"));
     }
 
     handleClose && handleClose();
   };
 
-  console.log(error, "erroerrorerrorerrorr");
   return (
     <Form>
-      {error && <Alert>{error}</Alert>}
-
+      <Alert />
       <InputTextField
         label="Enter title"
-        placeholder="Enter yout title"
+        placeholder="Enter your title"
         setVal={setTitle}
         val={title}
       />
-
       <InputTextField
         label="Enter description"
         multiline={true}
-        placeholder="Enter yout description"
+        placeholder="Enter your description"
         setVal={setDesc}
         val={description}
       />
@@ -157,6 +159,18 @@ export default function TaskModal({ handleClose }) {
         })}
       </select>
 
+      {isEdit && (
+        <div style={{ marginTop: 10 }}>
+          <label>
+            <input
+              type="checkbox"
+              defaultChecked={checked}
+              onChange={() => setChecked(!checked)}
+            />
+            Do you complete this toic
+          </label>
+        </div>
+      )}
       <Center style={{ margin: 10 }} fullHeight={false}>
         <Button onClick={submitFormHandler}>
           <Title>{isEdit ? "EDIT" : "SUBMIT"}</Title>
@@ -174,40 +188,3 @@ const Form = styled.div`
 //   width: 40px;
 //   height: 40px;
 // `;
-
-const colors = [
-  {
-    code: "red",
-  },
-  {
-    code: "green",
-  },
-  {
-    code: "pink",
-  },
-
-  {
-    code: "blue",
-  },
-  {
-    code: "yellow",
-  },
-  {
-    code: "aliceblue",
-  },
-  {
-    code: "black",
-  },
-  {
-    code: "purple",
-  },
-  {
-    code: "gray",
-  },
-  {
-    code: "brown",
-  },
-  {
-    code: "orange",
-  },
-];

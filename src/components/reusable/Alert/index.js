@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { errorAction } from "../../../redux/action/errorActions";
 import Absolute from "../Absolute";
 
 export default function Alert({ children }) {
   const dispatch = useDispatch();
+  const { error } = useSelector((state) => state.errorReducers);
 
   const closeError = () => {
     dispatch(errorAction(null));
@@ -19,15 +20,20 @@ export default function Alert({ children }) {
   }, []);
 
   return (
-    <AlertMain>
-      <Content>
-        <MSG>{children}</MSG>
-
-        <Absolute onClick={closeError}>
-          <Close>X</Close>
-        </Absolute>
-      </Content>
-    </AlertMain>
+    <>
+      {error ? (
+        <AlertMain>
+          <Content>
+            <MSG>{error}</MSG>
+            <Absolute onClick={closeError}>
+              <Close>X</Close>
+            </Absolute>
+          </Content>
+        </AlertMain>
+      ) : (
+        <></>
+      )}
+    </>
   );
 }
 
