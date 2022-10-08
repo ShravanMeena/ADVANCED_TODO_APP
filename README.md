@@ -11,6 +11,7 @@ To-do application for keeping to-do records of past, present and future.
 - Delete task.
 - View task details.
 - Attractive UI.
+- Custom Sweet alert for error.
 
 ## Technology Stack Used In This Project
 * ReactJs
@@ -87,3 +88,6 @@ To-do application for keeping to-do records of past, present and future.
 
 
 
+### Note 
+
+Please do not commit to master branch. please merge your branch with development branch.
