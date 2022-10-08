@@ -1,51 +1,88 @@
 ![](https://github.com/ShravanMeena/Notes-Taking-App-TO-DO/blob/main/src/assets/demo_.png?raw=true)
 
-## Visit website
 
-[Portfolio](https://www.https://shravanmeena.netlify.app/).
+## Project
+To-do application for keeping to-do records of past, present and future.
 
-## Tech Stack
+## Features
+- Create new chat task.
+- Edit existing task. 
+- Set your task completed.
+- Delete task.
+- View task details.
 
-<img src="https://i.postimg.cc/fWKwrRhL/download.png">
+## Technology Stack Used In This Project
+* ReactJs
+* Redux
+* React Router
+* Redux Persist
+* JavaScript
+* Styled Components
+* HTML/CSS
 
-## How to get started❓
+## Project Live
+### [Click here](https://notes0799.netlify.app/) 
 
-You can refer to [this](https://github.com/firstcontributions/first-contributions) if you are contributing for the first time:
+## Run This Project on Your Local Machine
 
-## Contribution Guidelines 🏗
+1. Clone the repository to your local desktop
+    ```
+    git clone paste_link_you_copied
+    ```
+2. Change the directory 
+    ```
+    cd Notes-Taking-App-TO-DO
+    ```
+3. Install requirements.txt
+    ```
+    npm install or yarn install
+    ```
+4. Run the application
+    ```
+    npm start
+    ```
+ 
+## How to Contribute
 
-If you find a bug or want o add a new feature, browse the [open issues](https://github.com/ShravanMeena/https://shravanmeena.netlify.app/issues) before opening a new one. You can also take a look at the [Open Source Guide](https://opensource.guide/).
+1. Make a Fork.
+2. Clone the repository to your local desktop.
+    ```
+    git clone paste_link_you_copied
+    ```
+3. Create a new branch (It's necessary).
+    ```
+    git checkout -b branch-name
+    ```
+4. Make changes and Add to Staging here.
+    ```
+    git add.
+    ```
+5. Commit changes.
+    ```
+    git commit -m "Message you want to write"
+    ```
+    * _Always __write the message__ short and easy to understand (ideally 3 to 5 words)._
+6. Push the changes so that a pull request will be generated.
+    ```
+    git push -u origin branchName
+    ```
+7. Make PR.
+8. Commits should be descriptive.
+9. Try to minimize conflicts.
+10. Follow these steps only after you have Git installed in your system.
 
-**0.** Wait for the Issue to be assigned to you before you start working on it.
+## Where to Contribute
+1. __UX/UI__
+    * You can improve the existing User Interface or can introduce a new layout for Flack.
+2. __Code reformat__
+    * You can introduce more concise and readable code 
+3. __Improvements in Backend__
+    * You can find any bug or error and can fix it
+4. __Readme file__
+    * If you think that something is missing from the readme file. You can introduce new sections for the readme file or can improve the existing one. 
 
-**1.** Fork [this](https://github.com/ShravanMeena/Notes-Taking-App-TO-DO) repository.
 
-**2.** Clone your forked copy of the project.
+[Click here](https://github.com/ShravanMeena/Notes-Taking-App-TO-DO) to Contribute 
 
-**3.** Navigate to the project directory.
 
-**4.** Create a new branch.
 
-**5.** Install with:
-
-```
-yarn install
-```
-
-**6.** Start project with:
-
-```
-yarn start
-```
-
-**7.** Make your changes to the code base.
-
-**8.** Add and commit your changes
-
-**9.** Push committed changes to your remote repo.
-
-**12.** Create a pull request, click on `compare and pull requests`. Please ensure you compare your feature branch to the desired branch of the repo you are supposed to make a PR to.
-
-**13.** Add an appropriate title and description to your pull request explaining your changes and efforts done.
-
-**14.** Click on `Create Pull Request`.
