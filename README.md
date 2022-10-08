@@ -5,11 +5,12 @@
 To-do application for keeping to-do records of past, present and future.
 
 ## Features
-- Create new chat task.
-- Edit existing task. 
-- Set your task completed.
+- Create new task/notes.
+- Edit existing task/notes. 
+- Set your task/notes completed.
 - Delete task.
 - View task details.
+- Attractive UI.
 
 ## Technology Stack Used In This Project
 * ReactJs
